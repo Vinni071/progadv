@@ -18,7 +18,7 @@ BRANCO = pygame.Color("#49E5DD")
 PRETO = ("#121212")
 CINZA = pygame.Color("#0F9EA5")
 AMARELO = (255, 255, 0)  # Cor do cursor
-AZUL = pygame.image.load("7530653-pixel-art-ship-vetor-removebg-preview.png").convert_alpha  # Cor da peça colocada
+AZUL = pygame.image.load("pixil-frame-0(2).png").convert_alpha  # Cor da peça colocada
 MENU_FUNDO = (200, 200, 200)  # Cor do fundo do menu
 
 # Carrega a imagem de fundo
@@ -26,7 +26,7 @@ IMAGEM_FUNDO = pygame.image.load("Mídia.jpg").convert()  # Substitua pelo camin
 IMAGEM_FUNDO = pygame.transform.scale(IMAGEM_FUNDO, (LARGURA, ALTURA))
 
 # Carrega a imagem da peça
-IMAGEM_PECA = pygame.image.load("7530653-pixel-art-ship-vetor-removebg-preview.png").convert_alpha()
+IMAGEM_PECA = pygame.image.load("pixil-frame-0(2).png").convert_alpha()
 IMAGEM_PECA = pygame.transform.scale(IMAGEM_PECA, (TAMANHO_CELULA, TAMANHO_CELULA))
 
 # Configuração da fonte
@@ -134,7 +134,7 @@ while executando:
             
             # Define transparência
             cor_com_alpha = cor
-            cor_com_alpha.a = 128  # 50% de opacidade
+            cor_com_alpha.a = 0  # 50% de opacidade
 
             # Desenha cada célula
             pygame.draw.rect(superficie_tabuleiro, cor_com_alpha, 
