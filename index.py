@@ -1,39 +1,70 @@
 import flet as ft
 
+
 def main(page: ft.Page):
-    page.bgcolor = ft.colors.TRANSPARENT
-    page.add(
-        ft.Container(
-            image_src="2303292.jpg",  # Nome do arquivo na pasta do projeto
-            expand=True
-        ),
-        ft.CupertinoFilledButton(
-            content=ft.Text("CupertinoFilled"),
-            opacity_on_click=0.3,
-            on_click=lambda e: print("CupertinoFilledButton clicked!"),
-        ),
+    page.title = "Batalha Naval"
+    page.window_width = 500
+    page.window_height = 500
+    page.padding = 0
+    page.spacing = 0
+
+    # Logo
+    logo = ft.Image(
+        src="Minha_imagem_do_ChatGPT-removebg-preview.png",
+        width=250,
+        height=250
     )
 
-    # Definindo o stack e seus elementos
-    image = ft.Image(src="2303292.jpg", fit=ft.ImageFit.COVER)
-    button = ft.CupertinoFilledButton(
-        content=ft.Text("Button"),
-        on_click=lambda e: print("Button clicked!")
+    # Botões
+    jogar_btn = ft.ElevatedButton(
+        text="JOGAR",
+        style=ft.ButtonStyle(
+            padding=20,
+            bgcolor=ft.colors.BLUE_700,
+            color=ft.colors.WHITE,
+        ),
+        on_click=lambda e: print("Jogar clicado")
     )
-    stack = ft.Stack(
+
+    sair_btn = ft.ElevatedButton(
+        text="SAIR",
+        style=ft.ButtonStyle(
+            padding=20,
+            bgcolor=ft.colors.RED_700,
+            color=ft.colors.WHITE,
+        ),
+        on_click=lambda e: page.close
+    )
+
+    # Conteúdo central
+    conteudo = ft.Column(
         [
-            image,
-            button
+            logo,
+            ft.Container(height=30),
+            jogar_btn,
+            ft.Container(height=10),
+            sair_btn
         ],
-        width=300,
-        height=200
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        expand=True
     )
 
-    # Posicionando o botão no centro
-    button.top = 80  # Ajuste conforme o tamanho da imagem
-    button.left = 100  # Ajuste conforme necessário
+    # Stack com imagem de fundo + conteúdo
+    fundo = ft.Image(
+        src="Mídia.gif",  # imagem de fundo (pode ser caminho local ou URL)
+        fit=ft.ImageFit.COVER,
+        expand=True
+    )
 
-    page.add(stack)
-    
+    page.add(
+        ft.Stack(
+            controls=[
+                fundo,
+                conteudo
+            ],
+            expand=True
+        )
+    )
 
 ft.app(target=main)
