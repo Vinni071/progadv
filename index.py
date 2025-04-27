@@ -1,5 +1,13 @@
 import flet as ft
+import subprocess
+import sys
 
+def run_script(script_path):
+    subprocess.Popen(["python3", script_path])
+
+def kill(*scripts):
+    for script in scripts:
+        subprocess.Popen(["pkill", "-f", script])
 
 def main(page: ft.Page):
     page.title = "Batalha Naval"
@@ -23,7 +31,7 @@ def main(page: ft.Page):
             bgcolor=ft.colors.BLUE_700,
             color=ft.colors.WHITE,
         ),
-        on_click=lambda e: print("Jogar clicado")
+        on_click=lambda e: run_script("ED.py")
     )
 
     sair_btn = ft.ElevatedButton(
@@ -33,7 +41,7 @@ def main(page: ft.Page):
             bgcolor=ft.colors.RED_700,
             color=ft.colors.WHITE,
         ),
-        on_click=lambda e: page.close
+        on_click=lambda e: kill("ED.py", "index.py")
     )
 
     # Conteúdo central
@@ -50,13 +58,18 @@ def main(page: ft.Page):
         expand=True
     )
 
-    # Stack com imagem de fundo + conteúdo
-    fundo = ft.Image(
-        src="Mídia.gif",  # imagem de fundo (pode ser caminho local ou URL)
-        fit=ft.ImageFit.COVER,
-        expand=True
+    # Fundo: Container que expande e centraliza o GIF
+    fundo = ft.Container(
+        expand=True,                              # ocupa toda a janela
+        alignment=ft.alignment.center,            # centraliza o conteúdo
+        content=ft.Image(
+            src="Mídia.gif",
+            fit=ft.ImageFit.COVER,              # mantém proporção sem distorcer
+            expand=True                           # permite crescer dentro do container
+        )
     )
 
+    # Stack com imagem de fundo + conteúdo centralizado
     page.add(
         ft.Stack(
             controls=[
